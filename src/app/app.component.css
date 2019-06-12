@@ -1,0 +1,10 @@
+.container {
+  padding:112px 0;
+  width:100%;
+  text-align:center;
+}
+
+.container input {
+  width:332px;
+  margin:0 auto;
+}
