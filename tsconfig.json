@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-number-validation": [
+        "dist/ngx-number-validation"
+      ],
+      "ngx-number-validation/*": [
+        "dist/ngx-number-validation/*"
+      ]
+    }
   }
 }

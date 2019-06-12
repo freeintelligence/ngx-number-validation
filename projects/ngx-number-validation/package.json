@@ -1,0 +1,32 @@
+{
+  "name": "ngx-number-validation",
+  "version": "8.0.0",
+  "description": "Angular 8: numerical validation for reactive forms, pipes, directives, among others..",
+  "author": {
+    "name": "FreeIntelligence",
+    "email": "free04381@gmail.com"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nalv/ngx-number-validation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nalv/ngx-number-validation/issues"
+  },
+  "homepage": "https://github.com/nalv/ngx-number-validation#readme",
+  "keywords": [
+    "angular",
+    "angular8",
+    "ng",
+    "ngx",
+    "number",
+    "universal",
+    "validation",
+    "validator"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
+  }
+}
