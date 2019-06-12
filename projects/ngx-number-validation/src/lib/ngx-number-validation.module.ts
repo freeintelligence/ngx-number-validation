@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { NgxNumberValidationComponent } from './ngx-number-validation.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { MinLimitDirective } from './directives/min-limit.directive';
 
 @NgModule({
-  declarations: [NgxNumberValidationComponent],
+  declarations: [MinLimitDirective],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  exports: [NgxNumberValidationComponent]
+  exports: [MinLimitDirective],
 })
 export class NgxNumberValidationModule { }
