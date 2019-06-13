@@ -10,6 +10,6 @@ import { MaxLimitDirective } from './directives/max-limit.directive';
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [MinLimitDirective],
+  exports: [MinLimitDirective, MaxLimitDirective],
 })
 export class NgxNumberValidationModule { }
