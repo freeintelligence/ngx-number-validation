@@ -1,5 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 
+import { Transform } from 'number-validation';
+
 export class NumberServiceConfig {
   decimalSeparator = '.';
   thousandSeparator = ',';
@@ -9,6 +11,10 @@ export class NumberServiceConfig {
 @Injectable()
 export class NumberService {
 
-  constructor(@Optional() public config: NumberServiceConfig) { }
+  transform: Transform;
+
+  constructor(@Optional() public config: NumberServiceConfig) {
+    this.transform = new Transform(this.config.decimalSeparator, this.config.thousandSeparator, this.config.decimalCount);
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+import { NumberService } from '../number.service';
 
 @Directive({
   selector: '[numberMaxLimit]'
@@ -9,33 +10,17 @@ export class MaxLimitDirective {
 
   @Input() numberMaxLimit: number | string;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private numberService: NumberService) {
     this.element = this.elementRef.nativeElement;
   }
 
   @HostListener('keyup', ['$event'])
-  onKeyUp(event: KeyboardEvent) {
-    if (this.parsedNumber(this.element.value) > this.parsedNumber(this.numberMaxLimit)) {
-      this.element.value = this.parsedNumber(this.numberMaxLimit).toString();
+  onkeyup(event: KeyboardEvent) {
+    const key = event.key;
+
+    if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
+      this.element.value = this.numberService.transform.max(this.element.value, this.numberMaxLimit);
     }
-  }
-
-  parsedNumber(num?: number | string): number {
-    if (typeof num === 'undefined') {
-      num = this.numberMaxLimit;
-    }
-
-    if (typeof num === 'number') {
-      return num;
-    } else if (typeof num === 'string') {
-      const toint = Number(num);
-
-      if (!isNaN(toint)) {
-        return toint;
-      }
-    }
-
-    return undefined;
   }
 
 }

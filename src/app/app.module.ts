@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    NgxNumberValidationModule.forRoot({ decimalSeparator: '.', thousandSeparator: ',', decimalCount: 2 }),
+    NgxNumberValidationModule.forRoot({ decimalSeparator: ',', thousandSeparator: '.', decimalCount: 2 }),
     BrowserModule
   ],
   providers: [],

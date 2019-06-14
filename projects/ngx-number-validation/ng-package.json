@@ -3,5 +3,9 @@
   "dest": "../../dist/ngx-number-validation",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "number-validation"
+  ]
 }
