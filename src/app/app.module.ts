@@ -1,15 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxNumberValidationModule } from 'ngx-number-validation';
 
 import { AppComponent } from './app.component';
-import { NgxNumberValidationModule } from 'ngx-number-validation';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    NgxNumberValidationModule,
+    NgxNumberValidationModule.forRoot({ decimalSeparator: '.', thousandSeparator: ',', decimalCount: 16 }),
     BrowserModule
   ],
   providers: [],

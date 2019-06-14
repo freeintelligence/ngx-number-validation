@@ -28,5 +28,8 @@
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0"
+  },
+  "dependencies": {
+    "number-validation": "^1.0.0"
   }
 }
