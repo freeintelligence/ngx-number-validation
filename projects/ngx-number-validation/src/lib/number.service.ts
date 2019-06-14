@@ -11,10 +11,14 @@ export class NumberServiceConfig {
 @Injectable()
 export class NumberService {
 
-  transform: Transform;
+  constructor(@Optional() public config: NumberServiceConfig) { }
 
-  constructor(@Optional() public config: NumberServiceConfig) {
-    this.transform = new Transform(this.config.decimalSeparator, this.config.thousandSeparator, this.config.decimalCount);
+  public transform(options: NumberServiceConfig = { }) {
+    options.decimalSeparator = typeof options.decimalSeparator === 'string' ? options.decimalSeparator : this.config.decimalSeparator;
+    options.thousandSeparator = typeof options.thousandSeparator === 'string' ? options.thousandSeparator : this.config.thousandSeparator;
+    options.decimalCount = typeof options.decimalCount === 'number' && !isNaN(options.decimalCount) ? options.decimalCount : this.config.decimalCount;
+
+    return new Transform(options.decimalSeparator, options.thousandSeparator, options.decimalCount);
   }
 
 }

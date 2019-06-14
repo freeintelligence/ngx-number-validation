@@ -19,7 +19,9 @@ export class DecimalsDirective {
     const key = event.key;
 
     if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
-      this.element.value = this.numberService.transform.format(this.element.value);
+      this.element.value = this.numberService.transform({
+        decimalCount: Number(this.numberDecimals)
+      }).format(this.element.value);
     }
   }
 

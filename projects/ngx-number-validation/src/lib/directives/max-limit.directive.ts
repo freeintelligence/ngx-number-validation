@@ -20,7 +20,9 @@ export class MaxLimitDirective {
     const key = event.key;
 
     if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
-      this.element.value = this.numberService.transform.max(this.element.value, this.numberMaxLimit);
+      this.element.value = this.numberService.transform({
+        decimalCount: Number(this.numberDecimals)
+      }).max(this.element.value, this.numberMaxLimit);
     }
   }
 
