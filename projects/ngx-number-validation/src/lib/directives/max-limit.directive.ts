@@ -1,8 +1,10 @@
 import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 import { NumberService } from '../number.service';
+import { NgModel } from '@angular/forms';
 
 @Directive({
-  selector: '[numberMaxLimit]'
+  selector: '[ngModel][numberMaxLimit]',
+  providers: [NgModel],
 })
 export class MaxLimitDirective {
 
@@ -11,7 +13,7 @@ export class MaxLimitDirective {
   @Input() numberMaxLimit: number | string;
   @Input() numberDecimals: number | string;
 
-  constructor(private elementRef: ElementRef, private numberService: NumberService) {
+  constructor(private elementRef: ElementRef, private numberService: NumberService, private model: NgModel) {
     this.element = this.elementRef.nativeElement;
   }
 
@@ -23,6 +25,7 @@ export class MaxLimitDirective {
       this.element.value = this.numberService.transform({
         decimalCount: Number(this.numberDecimals)
       }).max(this.element.value, this.numberMaxLimit);
+      this.model.update.emit(this.element.value);
     }
   }
 

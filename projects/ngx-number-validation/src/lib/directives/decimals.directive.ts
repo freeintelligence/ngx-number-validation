@@ -1,8 +1,10 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 import { NumberService } from '../number.service';
+import { NgModel } from '@angular/forms';
 
 @Directive({
-  selector: '[numberDecimals]'
+  selector: '[ngModel][numberDecimals]',
+  providers: [NgModel],
 })
 export class DecimalsDirective {
 
@@ -10,7 +12,7 @@ export class DecimalsDirective {
 
   @Input() numberDecimals: number | string;
 
-  constructor(private elementRef: ElementRef, private numberService: NumberService) {
+  constructor(private elementRef: ElementRef, private numberService: NumberService, private model: NgModel) {
     this.element = this.elementRef.nativeElement;
   }
 
@@ -22,6 +24,7 @@ export class DecimalsDirective {
       this.element.value = this.numberService.transform({
         decimalCount: Number(this.numberDecimals)
       }).format(this.element.value);
+      this.model.update.emit(this.element.value);
     }
   }
 
