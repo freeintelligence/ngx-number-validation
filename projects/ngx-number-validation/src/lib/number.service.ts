@@ -3,9 +3,9 @@ import { Injectable, Optional } from '@angular/core';
 import { Transform } from 'number-validation';
 
 export class NumberServiceConfig {
-  decimalSeparator = '.';
-  thousandSeparator = ',';
-  decimalCount = 32;
+  decimalSeparator ? = '.';
+  thousandSeparator ? = ',';
+  decimalCount ? = 32;
 }
 
 @Injectable()

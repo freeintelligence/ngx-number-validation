@@ -1,14 +1,13 @@
-import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { NumberService } from '../number.service';
 
 @Directive({
-  selector: '[numberMaxLimit]'
+  selector: '[numberDecimals]'
 })
-export class MaxLimitDirective {
+export class DecimalsDirective {
 
   private element: HTMLInputElement;
 
-  @Input() numberMaxLimit: number | string;
   @Input() numberDecimals: number | string;
 
   constructor(private elementRef: ElementRef, private numberService: NumberService) {
@@ -20,7 +19,7 @@ export class MaxLimitDirective {
     const key = event.key;
 
     if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
-      this.element.value = this.numberService.transform.max(this.element.value, this.numberMaxLimit);
+      this.element.value = this.numberService.transform.format(this.element.value);
     }
   }
 
