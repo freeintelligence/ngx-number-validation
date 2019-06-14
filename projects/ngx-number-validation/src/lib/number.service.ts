@@ -6,11 +6,9 @@ export class NumberServiceConfig {
   decimalCount = 32;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class NumberService {
 
-  constructor(@Optional() config: NumberServiceConfig) { }
+  constructor(@Optional() public config: NumberServiceConfig) { }
 
 }

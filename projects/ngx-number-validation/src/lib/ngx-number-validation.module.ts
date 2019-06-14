@@ -5,7 +5,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { MinLimitDirective } from './directives/min-limit.directive';
 import { MaxLimitDirective } from './directives/max-limit.directive';
 
-import { NumberServiceConfig } from './number.service';
+import { NumberServiceConfig, NumberService } from './number.service';
 
 @NgModule({
   declarations: [MinLimitDirective, MaxLimitDirective],
@@ -21,7 +21,8 @@ export class NgxNumberValidationModule {
     return {
       ngModule: NgxNumberValidationModule,
       providers: [
-        { provide: NumberServiceConfig, useValue: config }
+        { provide: NumberServiceConfig, useValue: config },
+        NumberService
       ]
     };
   }

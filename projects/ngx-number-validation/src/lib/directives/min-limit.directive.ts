@@ -1,4 +1,5 @@
 import { Directive, HostListener, ElementRef, Input } from '@angular/core';
+import { NumberService } from '../number.service';
 
 @Directive({
   selector: '[numberMinLimit]'
@@ -9,7 +10,7 @@ export class MinLimitDirective {
 
   @Input() numberMinLimit: number | string;
 
-  constructor(private elementRef: ElementRef) {
+  constructor(private elementRef: ElementRef, private numberService: NumberService) {
     this.element = this.elementRef.nativeElement;
   }
 
