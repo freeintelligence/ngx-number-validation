@@ -3,3 +3,4 @@
  */
 
 export * from './lib/ngx-number-validation.module';
+export * from './lib/number.service';

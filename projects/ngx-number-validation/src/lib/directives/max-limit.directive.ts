@@ -3,7 +3,7 @@ import { NumberService } from '../number.service';
 import { NgModel } from '@angular/forms';
 
 @Directive({
-  selector: '[ngModel][numberMaxLimit]',
+  selector: '[numberMaxLimit]',
   providers: [NgModel],
 })
 export class MaxLimitDirective {

@@ -3,7 +3,7 @@ import { NumberService } from '../number.service';
 import { NgModel } from '@angular/forms';
 
 @Directive({
-  selector: '[ngModel][numberDecimals]',
+  selector: '[numberDecimals]',
   providers: [NgModel],
 })
 export class DecimalsDirective {
