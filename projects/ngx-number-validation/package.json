@@ -30,6 +30,6 @@
     "@angular/core": "^8.0.0"
   },
   "dependencies": {
-    "number-validation": "^1.0.0"
+    "number-validation": "^1.1.0"
   }
 }
