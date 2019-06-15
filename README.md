@@ -1,27 +1,89 @@
-# NgxNumberValidationApp
+# ngx-number-validation
+Validation of numbers to Angular.
+Includes pipes, directives, reactive forms among others.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+Install with:
+```sh
+$ npm install ngx-number-validation
+```
 
-## Development server
+## Implement in your project
+You must import the `NgxNumberValidationModule` module to your main module, next to the` forRoot` method.
+```ts
+import { NgModule } from '@angular/core';
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+import { NgxNumberValidationModule } from 'ngx-number-validation';
 
-## Code scaffolding
+@NgModule({
+  declarations: [
+  ],
+  imports: [
+    NgxNumberValidationModule.forRoot({ decimalSeparator: ',', thousandSeparator: '.', decimalCount: 2 }),
+  ],
+  providers: [],
+  bootstrap: []
+})
+export class AppModule { }
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Module options
+`decimalSeparator`, `thousandSeparator` and `decimalCount`.
 
-## Build
+## Directives
+### Example
+```html
+<!-- number between -10 and 10 (with 2 decimals) -->
+<input type="text" [(ngModel)]="num" numberMinLimit="-10" numberMaxLimit="10" numberDecimals="2">
+```
+### numberMinLimit
+Limit the possible minimum number for an `input`.
+```html
+<input type="text" [(ngModel)]="num" numberMinLimit="-10">
+```
+### numberMaxLimit
+Limit the possible maximum number for an `input`.
+```html
+<input type="text" [(ngModel)]="num" numberMaxLimit="10">
+```
+### numberDecimals
+Limit the possible decimals count for an `input`.
+```html
+<input type="text" [(ngModel)]="num" numberDecimals="2">
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Services
+Only one service is occupied and you can access the main instance of the system.
+### Transform local number to a native number
+```html
+<input type="text" [(ngModel)]="num" numberMinLimit="-10" numberMaxLimit="10" numberDecimals="2">
 
-## Running unit tests
+<p>Sum + 4: {{ num }}</p>
+```
+```ts
+import { Component } from '@angular/core';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+import { NumberService } from 'ngx-number-validation';
 
-## Running end-to-end tests
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+  num: string;
 
-## Further help
+  constructor(private numberService: NumberService) {
+  }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  toMath() {
+    return this.numberService.transform().toInt(this.num);
+  }
+
+  sum() {
+    return this.toMath() + 4;
+  }
+
+}
+
+```
