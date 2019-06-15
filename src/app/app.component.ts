@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NumberService } from 'ngx-number-validation';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +9,7 @@ export class AppComponent {
 
   number: string;
 
-  constructor(private numberService: NumberService) {
-    console.log('settings', this.numberService.config);
+  constructor() {
   }
 
 }

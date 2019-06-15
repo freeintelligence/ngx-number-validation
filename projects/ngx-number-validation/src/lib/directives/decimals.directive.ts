@@ -1,6 +1,7 @@
 import { Directive, HostListener, ElementRef, Input } from '@angular/core';
-import { NumberService } from '../number.service';
 import { NgModel } from '@angular/forms';
+
+import { NumberService } from '../number.service';
 
 @Directive({
   selector: '[numberDecimals]',
