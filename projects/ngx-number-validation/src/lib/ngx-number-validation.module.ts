@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
 
-import { MinLimitDirective } from './directives/min-limit.directive';
-import { MaxLimitDirective } from './directives/max-limit.directive';
+import { MinDirective } from './directives/min.directive';
+import { MaxDirective } from './directives/max.directive';
 import { DecimalsDirective } from './directives/decimals.directive';
 
 import { NumberServiceConfig, NumberService } from './number.service';
 
 @NgModule({
-  declarations: [MinLimitDirective, MaxLimitDirective, DecimalsDirective],
-  exports: [MinLimitDirective, MaxLimitDirective, DecimalsDirective],
+  declarations: [MinDirective, MaxDirective, DecimalsDirective],
+  exports: [MinDirective, MaxDirective, DecimalsDirective],
   imports: [
     FormsModule,
     ReactiveFormsModule,

@@ -4,13 +4,14 @@ import { NgModel, FormControlName } from '@angular/forms';
 import { NumberService } from '../number.service';
 
 @Directive({
-  selector: '[numberDecimals]',
+  selector: '[numberMin]',
   providers: [NgModel, FormControlName],
 })
-export class DecimalsDirective {
+export class MinDirective {
 
   private element: HTMLInputElement;
 
+  @Input() numberMin: number | string;
   @Input() numberDecimals: number | string;
 
   constructor(private elementRef: ElementRef, private numberService: NumberService, private model: NgModel, private formControlName: FormControlName) {
@@ -24,7 +25,7 @@ export class DecimalsDirective {
     if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
       this.element.value = this.numberService.transform({
         decimalCount: Number(this.numberDecimals)
-      }).format(this.element.value);
+      }).min(this.element.value, this.numberMin);
 
       if (this.model && this.model.update && this.model.update.emit) {
         this.model.update.emit(this.element.value);

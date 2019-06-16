@@ -119,7 +119,7 @@
       "projectType": "library",
       "root": "projects/ngx-number-validation",
       "sourceRoot": "projects/ngx-number-validation/src",
-      "prefix": "lib",
+      "prefix": "number",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

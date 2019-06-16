@@ -1,9 +1,20 @@
 <div class="container">
-  <input type="text" [(ngModel)]="number" numberMinLimit="-110000" numberMaxLimit="76000" numberDecimals="4">
-  <br>
-  <input type="text" numberMinLimit="-110000" numberMaxLimit="76000" numberDecimals="4">
+  <div class="form">
+    <label>Con NgModel</label>
+    <input type="text" [(ngModel)]="number" numberMin="-110000" numberMax="76000" numberDecimals="4">
 
-  <ul>
-    <li>Valor sin cambios: {{ number }}</li>
-  </ul>
+    <ul>
+      <li>Valor sin cambios: {{ number }}</li>
+    </ul>
+  </div>
+  <div class="form">
+    <form [formGroup]="form" autocomplete="off">
+      <label>Con FormControlName</label>
+      <input type="text" formControlName="number" numberMin="-110000" numberMax="76000" numberDecimals="2">
+
+      <ul>
+        <li>Valor sin cambios: {{ form.controls.number.value }}</li>
+      </ul>
+    </form>
+  </div>
 </div>
