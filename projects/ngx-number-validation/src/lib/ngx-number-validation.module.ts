@@ -7,10 +7,11 @@ import { MaxDirective } from './directives/max.directive';
 import { DecimalsDirective } from './directives/decimals.directive';
 
 import { NumberServiceConfig, NumberService } from './number.service';
+import { FormatPipe } from './pipes/format.pipe';
 
 @NgModule({
-  declarations: [MinDirective, MaxDirective, DecimalsDirective],
-  exports: [MinDirective, MaxDirective, DecimalsDirective],
+  declarations: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe],
+  exports: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe],
   imports: [
     FormsModule,
     ReactiveFormsModule,
