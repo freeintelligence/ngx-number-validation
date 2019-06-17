@@ -19,8 +19,8 @@ export class MinDirective implements Validator {
   @Input() numberAuto = true;
   @Input() numberMin: number | string;
   @Input() numberDecimals: number | string;
-  @Input() numberDecimalSeparator: string = this.numberService.config.decimalSeparator;
-  @Input() numberThousandSeparator: string = this.numberService.config.thousandSeparator;
+  @Input() numberDecimalSeparator: string = this.numberService.getConfig().decimalSeparator;
+  @Input() numberThousandSeparator: string = this.numberService.getConfig().thousandSeparator;
 
   constructor(private elementRef: ElementRef, private numberService: NumberService) {
     this.element = this.elementRef.nativeElement;
@@ -46,7 +46,7 @@ export class MinDirective implements Validator {
 
     const key = event.key;
 
-    if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
+    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
       this.format();
 
       if (this.model && this.model.update && this.model.update.emit) {

@@ -6,8 +6,10 @@ import { MinDirective } from './directives/min.directive';
 import { MaxDirective } from './directives/max.directive';
 import { DecimalsDirective } from './directives/decimals.directive';
 
-import { NumberServiceConfig, NumberService } from './number.service';
 import { FormatPipe } from './pipes/format.pipe';
+
+import { NumberServiceConfig, NumberService } from './number.service';
+import { ValidatorsService } from './validators.service';
 
 @NgModule({
   declarations: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe],
@@ -25,6 +27,7 @@ export class NgxNumberValidationModule {
       providers: [
         { provide: NumberServiceConfig, useValue: config },
         NumberService,
+        ValidatorsService,
       ]
     };
   }

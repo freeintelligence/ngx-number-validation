@@ -11,7 +11,7 @@
   <div class="form">
     <label>Con NgModel</label>
     <input type="text" #number2="ngModel" [(ngModel)]="number" name="number" numberAuto="false" numberMin="5000" autocomplete="off">
-    <p *ngIf="number2?.errors?.numberMin">El mínimo es 5000</p>
+    <p *ngIf="number2?.errors?.numberMin">El mínimo es {{ 5000 | numberFormat }}</p>
 
     <ul>
       <li>Valor sin cambios: {{ number }}</li>
@@ -21,7 +21,7 @@
     <form [formGroup]="form" autocomplete="off">
       <label>Con FormControlName</label>
       <input type="text" formControlName="number" name="number" numberMax="76000" numberDecimals="2">
-      <p *ngIf="form?.controls?.number?.errors?.numberMin">El mínimo es 5000</p>
+      <p *ngIf="form?.controls?.number?.errors?.numberMin">El mínimo es {{ 5000 | numberFormat }}</p>
 
       <ul>
         <li>Valor sin cambios: {{ form.controls.number.value }}</li>
