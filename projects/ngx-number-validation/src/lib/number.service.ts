@@ -14,11 +14,17 @@ export class NumberService {
   constructor(@Optional() public config: NumberServiceConfig) { }
 
   public transform(options: NumberServiceConfig = { }) {
+    options = this.getConfig(options);
+
+    return new Transform(options.decimalSeparator, options.thousandSeparator, options.decimalCount);
+  }
+
+  public getConfig(options: NumberServiceConfig): NumberServiceConfig {
     options.decimalSeparator = typeof options.decimalSeparator === 'string' ? options.decimalSeparator : this.config.decimalSeparator;
     options.thousandSeparator = typeof options.thousandSeparator === 'string' ? options.thousandSeparator : this.config.thousandSeparator;
     options.decimalCount = typeof options.decimalCount === 'number' && !isNaN(options.decimalCount) ? options.decimalCount : this.config.decimalCount;
 
-    return new Transform(options.decimalSeparator, options.thousandSeparator, options.decimalCount);
+    return options;
   }
 
 }

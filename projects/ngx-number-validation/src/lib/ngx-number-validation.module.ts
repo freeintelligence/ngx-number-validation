@@ -24,7 +24,7 @@ export class NgxNumberValidationModule {
       ngModule: NgxNumberValidationModule,
       providers: [
         { provide: NumberServiceConfig, useValue: config },
-        NumberService
+        NumberService,
       ]
     };
   }

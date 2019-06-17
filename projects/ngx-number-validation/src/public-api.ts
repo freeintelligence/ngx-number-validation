@@ -2,6 +2,7 @@
  * Public API Surface of ngx-number-validation
  */
 
+export * from './lib/validators/index';
 export * from './lib/directives';
 export * from './lib/pipes';
 export * from './lib/number.service';
