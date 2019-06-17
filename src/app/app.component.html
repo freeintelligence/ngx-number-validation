@@ -20,7 +20,7 @@
   <div class="form">
     <form [formGroup]="form" autocomplete="off">
       <label>Con FormControlName</label>
-      <input type="text" formControlName="number" name="number" numberMax="76000" numberDecimals="2">
+      <input type="text" formControlName="number" name="number" numberMin="5000" numberMax="76000" numberDecimals="2">
       <p *ngIf="form?.controls?.number?.errors?.numberMin">El mínimo es {{ 5000 | numberFormat }}</p>
 
       <ul>

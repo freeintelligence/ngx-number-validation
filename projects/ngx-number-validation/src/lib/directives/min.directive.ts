@@ -1,5 +1,5 @@
-import { Directive, HostListener, ElementRef, Input, ContentChild } from '@angular/core';
-import { NgModel, FormControlName, AbstractControl, NG_VALIDATORS, Validator } from '@angular/forms';
+import { Directive, ElementRef, Input } from '@angular/core';
+import { AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
 import { BaseFormatDirective } from './base_format.directive';
 import { NumberService } from '../number.service';

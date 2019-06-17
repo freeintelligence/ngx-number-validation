@@ -13,4 +13,8 @@ export class ValidatorsService {
     return NumberValidators.min(min, this.numberService.getConfig().decimalSeparator);
   }
 
+  max(max: string | number) {
+    return NumberValidators.max(max, this.numberService.getConfig().decimalSeparator);
+  }
+
 }

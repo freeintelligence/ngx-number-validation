@@ -1,39 +1,32 @@
-import { Directive, HostListener, ElementRef, Input } from '@angular/core';
-import { NgModel, FormControlName } from '@angular/forms';
+import { Directive, ElementRef, Input } from '@angular/core';
+import { NG_VALIDATORS, AbstractControl } from '@angular/forms';
 
+import { BaseFormatDirective } from './base_format.directive';
 import { NumberService } from '../number.service';
+import { NumberValidators } from './../validators';
 
 @Directive({
   selector: '[numberMax]',
-  providers: [NgModel, FormControlName],
+  providers: [{ provide: NG_VALIDATORS, useExisting: MaxDirective, multi: true }],
 })
-export class MaxDirective {
-
-  private element: HTMLInputElement;
+export class MaxDirective extends BaseFormatDirective {
 
   @Input() numberMax: number | string;
-  @Input() numberDecimals: number | string;
 
-  constructor(private elementRef: ElementRef, private numberService: NumberService, private model: NgModel, private formControlName: FormControlName) {
-    this.element = this.elementRef.nativeElement;
+  constructor(protected elementRef: ElementRef, protected numberService: NumberService) {
+    super(elementRef, numberService);
   }
 
-  @HostListener('keyup', ['$event'])
-  onkeyup(event: KeyboardEvent) {
-    const key = event.key;
+  format() {
+    return this.element.value = this.numberService.transform({
+      decimalCount: Number(this.numberDecimals),
+      decimalSeparator: this.numberDecimalSeparator,
+      thousandSeparator: this.numberThousandSeparator,
+    }).max(this.element.value, this.numberMax);
+  }
 
-    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
-      this.element.value = this.numberService.transform({
-        decimalCount: Number(this.numberDecimals)
-      }).max(this.element.value, this.numberMax);
-
-      if (this.model && this.model.update && this.model.update.emit) {
-        this.model.update.emit(this.element.value);
-      }
-      if (this.formControlName && this.formControlName.control && this.formControlName.control.setValue) {
-        this.formControlName.control.setValue(this.element.value);
-      }
-    }
+  validate(control: AbstractControl): { [key: string]: any } | null {
+    return NumberValidators.max(this.numberMax, this.numberDecimalSeparator)(control);
   }
 
 }
