@@ -5,6 +5,7 @@ import { ModuleWithProviders } from '@angular/compiler/src/core';
 import { MinDirective } from './directives/min.directive';
 import { MaxDirective } from './directives/max.directive';
 import { DecimalsDirective } from './directives/decimals.directive';
+import { AutoDirective } from './directives/auto.directive';
 
 import { FormatPipe } from './pipes/format.pipe';
 
@@ -12,8 +13,8 @@ import { NumberServiceConfig, NumberService } from './number.service';
 import { ValidatorsService } from './validators.service';
 
 @NgModule({
-  declarations: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe],
-  exports: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe],
+  declarations: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe, AutoDirective],
+  exports: [MinDirective, MaxDirective, DecimalsDirective, FormatPipe, AutoDirective],
   imports: [
     FormsModule,
     ReactiveFormsModule,
