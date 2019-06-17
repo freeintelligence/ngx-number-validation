@@ -10,7 +10,7 @@
 
   <div class="form">
     <label>Con NgModel</label>
-    <input type="text" #number2="ngModel" [(ngModel)]="number" name="number" numberAuto="true" numberMin="5000" autocomplete="off">
+    <input type="text" #number2="ngModel" [(ngModel)]="number" name="number" numberAuto="true" numberMin="5000" numberDecimals="5" autocomplete="off">
     <p *ngIf="number2?.errors?.numberMin">El mínimo es {{ 5000 | numberFormat }}</p>
 
     <ul>

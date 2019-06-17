@@ -1,38 +1,23 @@
-import { Directive, HostListener, ElementRef, Input } from '@angular/core';
-import { NgModel, FormControlName } from '@angular/forms';
+import { Directive, ElementRef } from '@angular/core';
 
+import { BaseFormatDirective } from './base_format.directive';
 import { NumberService } from '../number.service';
 
 @Directive({
   selector: '[numberDecimals]',
-  providers: [NgModel, FormControlName],
 })
-export class DecimalsDirective {
+export class DecimalsDirective extends BaseFormatDirective {
 
-  private element: HTMLInputElement;
-
-  @Input() numberDecimals: number | string;
-
-  constructor(private elementRef: ElementRef, private numberService: NumberService, private model: NgModel, private formControlName: FormControlName) {
-    this.element = this.elementRef.nativeElement;
+  constructor(protected elementRef: ElementRef, protected numberService: NumberService) {
+    super(elementRef, numberService);
   }
 
-  @HostListener('keyup', ['$event'])
-  onkeyup(event: KeyboardEvent) {
-    const key = event.key;
-
-    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
-      this.element.value = this.numberService.transform({
-        decimalCount: Number(this.numberDecimals)
-      }).format(this.element.value);
-
-      if (this.model && this.model.update && this.model.update.emit) {
-        this.model.update.emit(this.element.value);
-      }
-      if (this.formControlName && this.formControlName.control && this.formControlName.control.setValue) {
-        this.formControlName.control.setValue(this.element.value);
-      }
-    }
+  format() {
+    return this.element.value = this.numberService.transform({
+      decimalCount: Number(this.numberDecimals),
+      decimalSeparator: this.numberDecimalSeparator,
+      thousandSeparator: this.numberThousandSeparator,
+    }).format(this.element.value);
   }
 
 }
