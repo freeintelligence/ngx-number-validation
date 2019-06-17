@@ -22,7 +22,7 @@ export class MaxDirective {
   onkeyup(event: KeyboardEvent) {
     const key = event.key;
 
-    if (!(key === '-' || key === this.numberService.config.decimalSeparator || key === this.numberService.config.thousandSeparator)) {
+    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
       this.element.value = this.numberService.transform({
         decimalCount: Number(this.numberDecimals)
       }).max(this.element.value, this.numberMax);
