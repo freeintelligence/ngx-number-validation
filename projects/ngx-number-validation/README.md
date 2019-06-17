@@ -50,14 +50,23 @@ Limit the possible decimals count for an `input`.
 ```html
 <input type="text" [(ngModel)]="num" numberDecimals="2">
 ```
-
+## Pipes
+### Format numbers
+The options available for the pipe are the same as for the module, and if any value is not setted then the default options of the module will be used.
+```html
+<p>Pipe: {{ 12000 | numberFormat: { thousandSeparator: ',', decimalSeparator: '.', decimalCount: 2 } }}</p>
+```
+It is also possible to pass only the number of decimals and that the other options are established according to the module:
+```html
+<p>Pipe: {{ 12000 | numberFormat: 2 }}</p>
+```
 ## Services
 Only one service is occupied and you can access the main instance of the system.
 ### Transform local number to a native number
 ```html
 <input type="text" [(ngModel)]="num" numberMinLimit="-10" numberMaxLimit="10" numberDecimals="2">
 
-<p>Sum + 4: {{ num }}</p>
+<p>Sum + 4: {{ sum() }}</p>
 ```
 ```ts
 import { Component } from '@angular/core';
