@@ -19,4 +19,8 @@ export class AppComponent {
   constructor() {
   }
 
+  typeof(data: any) {
+    return typeof data;
+  }
+
 }
