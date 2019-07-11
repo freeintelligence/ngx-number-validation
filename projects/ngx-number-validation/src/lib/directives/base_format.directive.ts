@@ -42,12 +42,17 @@ export class BaseFormatDirective implements Validator {
     if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
       this.format();
 
+      const strValue = this.element.value;
+      const intValue = this.numberService.transform().toInt(strValue);
+
       if (this.model && this.model.update && this.model.update.emit) {
-        this.model.update.emit(this.element.value);
+        this.model.update.emit(intValue);
       }
       if (this.formControlName && this.formControlName.control && this.formControlName.control.setValue) {
-        this.formControlName.control.setValue(this.element.value);
+        this.formControlName.control.setValue(intValue);
       }
+
+      this.element.value = strValue;
     }
   }
 
