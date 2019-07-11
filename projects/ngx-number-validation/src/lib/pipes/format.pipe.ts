@@ -17,6 +17,10 @@ export class FormatPipe implements PipeTransform {
   transform(value: string | number, options: FormatPipeOptions | number): any {
     const realOptions: NumberServiceConfig = { };
 
+    if (typeof value !== 'string' && typeof value !== 'number') {
+      return value;
+    }
+
     if (typeof options === 'number') {
       realOptions.decimalCount = options;
     } else if (typeof options === 'object' && options !== null) {

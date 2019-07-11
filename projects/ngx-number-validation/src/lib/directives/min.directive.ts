@@ -22,7 +22,7 @@ export class MinDirective extends BaseFormatDirective {
       decimalCount: Number(this.numberDecimals),
       decimalSeparator: this.numberDecimalSeparator,
       thousandSeparator: this.numberThousandSeparator,
-    }).min(this.element.value, this.numberMin);
+    }).format(this.element.value);
   }
 
   validate(control: AbstractControl): { [key: string]: any } | null {

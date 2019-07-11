@@ -13,7 +13,7 @@ export class AppComponent {
   number: string;
 
   form: FormGroup = new FormGroup({
-    number: new FormControl('', [ NumberValidators.min(5000, ',') ]),
+    number: new FormControl(6000, [ NumberValidators.min(5000, ',') ]),
   });
 
   constructor() {
