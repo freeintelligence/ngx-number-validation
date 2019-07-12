@@ -1,9 +1,9 @@
-import { HostListener, ElementRef, Input, ContentChild } from '@angular/core';
+import { HostListener, ElementRef, Input, ContentChild, OnInit, AfterViewInit } from '@angular/core';
 import { NgModel, FormControlName, AbstractControl, Validator } from '@angular/forms';
 
 import { NumberService } from '../number.service';
 
-export class BaseFormatDirective implements Validator {
+export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
   protected element: HTMLInputElement;
 
@@ -17,6 +17,14 @@ export class BaseFormatDirective implements Validator {
 
   constructor(protected elementRef: ElementRef, protected numberService: NumberService) {
     this.element = this.elementRef.nativeElement;
+  }
+
+  ngOnInit() {
+    this.setValue();
+  }
+
+  ngAfterViewInit() {
+    this.setValue();
   }
 
   isAuto(): boolean {
@@ -40,20 +48,24 @@ export class BaseFormatDirective implements Validator {
     const key = event.key;
 
     if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
-      this.format();
-
-      const strValue = this.element.value;
-      const intValue = this.numberService.transform().toInt(strValue);
-
-      if (this.model && this.model.update && this.model.update.emit) {
-        this.model.update.emit(intValue);
-      }
-      if (this.formControlName && this.formControlName.control && this.formControlName.control.setValue) {
-        this.formControlName.control.setValue(intValue);
-      }
-
-      this.element.value = strValue;
+      this.setValue();
     }
+  }
+
+  setValue() {
+    this.format();
+
+    const strValue = this.element.value;
+    const intValue = this.numberService.transform().toInt(strValue);
+
+    if (this.model && this.model.update && this.model.update.emit) {
+      this.model.update.emit(intValue);
+    }
+    if (this.formControlName && this.formControlName.control && this.formControlName.control.setValue) {
+      this.formControlName.control.setValue(intValue);
+    }
+
+    this.element.value = strValue;
   }
 
   format() {
