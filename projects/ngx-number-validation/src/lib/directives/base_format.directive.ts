@@ -14,6 +14,7 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
   @Input() numberDecimals: number | string;
   @Input() numberDecimalSeparator: string = this.numberService.getConfig().decimalSeparator;
   @Input() numberThousandSeparator: string = this.numberService.getConfig().thousandSeparator;
+  @Input() numberDisableValidations = false;
 
   constructor(protected elementRef: ElementRef, protected numberService: NumberService) {
     this.element = this.elementRef.nativeElement;

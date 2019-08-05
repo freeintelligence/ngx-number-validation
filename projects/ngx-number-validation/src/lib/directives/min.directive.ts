@@ -26,6 +26,9 @@ export class MinDirective extends BaseFormatDirective {
   }
 
   validate(control: AbstractControl): { [key: string]: any } | null {
+    if (this.numberDisableValidations) {
+      return null;
+    }
     return NumberValidators.min(this.numberMin, this.numberDecimalSeparator)(control);
   }
 

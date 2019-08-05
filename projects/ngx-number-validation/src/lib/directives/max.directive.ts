@@ -26,6 +26,9 @@ export class MaxDirective extends BaseFormatDirective {
   }
 
   validate(control: AbstractControl): { [key: string]: any } | null {
+    if (this.numberDisableValidations) {
+      return null;
+    }
     return NumberValidators.max(this.numberMax, this.numberDecimalSeparator)(control);
   }
 
