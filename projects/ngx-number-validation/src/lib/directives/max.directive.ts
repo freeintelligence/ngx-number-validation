@@ -22,7 +22,7 @@ export class MaxDirective extends BaseFormatDirective {
       decimalCount: Number(this.numberDecimals),
       decimalSeparator: this.numberDecimalSeparator,
       thousandSeparator: this.numberThousandSeparator,
-    }).max(this.element.value, this.numberMax);
+    }).max(this.getNativeValue(), this.numberMax);
   }
 
   validate(control: AbstractControl): { [key: string]: any } | null {

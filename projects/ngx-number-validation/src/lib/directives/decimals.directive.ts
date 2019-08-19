@@ -17,7 +17,7 @@ export class DecimalsDirective extends BaseFormatDirective {
       decimalCount: Number(this.numberDecimals),
       decimalSeparator: this.numberDecimalSeparator,
       thousandSeparator: this.numberThousandSeparator,
-    }).format(this.element.value);
+    }).format(this.getNativeValue());
   }
 
 }

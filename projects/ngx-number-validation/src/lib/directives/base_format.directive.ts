@@ -69,6 +69,17 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
     this.element.value = strValue;
   }
 
+  getNativeValue() {
+    if (this.model && this.model.value) {
+      return this.model.value
+    }
+    if (this.formControlName && this.formControlName.control && this.formControlName.control.value) {
+      return this.formControlName.control.value
+    }
+
+    return this.element.value
+  }
+
   format() {
     return null;
   }
