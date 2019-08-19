@@ -62,7 +62,6 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
   setValue() {
     const nativeValue = this.getNativeValue();
 
-    console.log('native', nativeValue)
     if (nativeValue === null || typeof nativeValue === 'undefined' || nativeValue === '') {
       return;
     }
