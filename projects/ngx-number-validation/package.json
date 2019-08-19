@@ -1,6 +1,6 @@
 {
   "name": "ngx-number-validation",
-  "version": "8.4.0",
+  "version": "8.4.1",
   "description": "Angular 8: numerical validation for reactive forms, pipes, directives, among others..",
   "author": {
     "name": "FreeIntelligence",
@@ -27,7 +27,8 @@
   ],
   "peerDependencies": {
     "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0"
+    "@angular/core": "^8.0.0",
+    "@angular/cdk": "^8.0.0"
   },
   "dependencies": {
     "number-validation": "^1.1.1"
