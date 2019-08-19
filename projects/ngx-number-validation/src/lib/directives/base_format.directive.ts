@@ -1,5 +1,6 @@
 import { HostListener, ElementRef, Input, ContentChild, OnInit, AfterViewInit } from '@angular/core';
 import { NgModel, FormControlName, AbstractControl, Validator } from '@angular/forms';
+import { LEFT_ARROW, RIGHT_ARROW, END, HOME } from '@angular/cdk/keycodes';
 
 import { NumberService } from '../number.service';
 
@@ -42,23 +43,35 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
   @HostListener('keyup', ['$event'])
   onkeyup(event: KeyboardEvent) {
-    if (!this.element.value.length || !this.isAuto()) {
+    if (!this.isAuto() || event.keyCode === LEFT_ARROW || event.keyCode === RIGHT_ARROW || event.keyCode === END || event.keyCode === HOME) {
       return false;
     }
 
     const key = event.key;
 
-    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator)) {
+    if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator )) {
       this.setValue();
     }
   }
 
+  @HostListener('blur', ['$event'])
+  focusout(event: any) {
+    this.setValue();
+  }
+
   setValue() {
+    const nativeValue = this.getNativeValue();
+
+    console.log('native', nativeValue)
+    if (nativeValue === null || typeof nativeValue === 'undefined' || nativeValue === '') {
+      return;
+    }
+
     this.format();
 
     const strValue = this.element.value;
-    const intValue = this.numberService.transform().toInt(strValue);
-
+    const intValue = strValue.length ? this.numberService.transform().toInt(strValue) : null;
+    
     if (this.model && this.model.update && this.model.update.emit) {
       this.model.update.emit(intValue);
     }
