@@ -10,13 +10,14 @@ import { NumberValidators } from 'ngx-number-validation';
 })
 export class AppComponent {
 
-  number: string;
+  number = 20000;
 
   form: FormGroup = new FormGroup({
     number: new FormControl(null, [ NumberValidators.min(5000, ',') ]),
   });
 
   constructor() {
+    this.form.controls.number.setValue(10000);
   }
 
   typeof(data: any) {

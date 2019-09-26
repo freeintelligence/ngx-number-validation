@@ -27,6 +27,16 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.setValue();
+
+    if (this.model) {
+      this.model.valueChanges.subscribe(e => {
+        this.element.value = this.numberService.transform().format(this.element.value);
+      });
+    } else if (this.formControlName) {
+      this.formControlName.valueChanges.subscribe(e => {
+        this.element.value = this.numberService.transform().format(this.element.value);
+      });
+    }
   }
 
   isAuto(): boolean {
@@ -70,7 +80,7 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
     const strValue = this.element.value;
     const intValue = strValue.length ? this.numberService.transform().toInt(strValue) : null;
-    
+
     if (this.model && this.model.update && this.model.update.emit) {
       this.model.update.emit(intValue);
     }
@@ -83,13 +93,13 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
   getNativeValue() {
     if (this.model && this.model.value) {
-      return this.model.value
+      return this.model.value;
     }
     if (this.formControlName && this.formControlName.control && this.formControlName.control.value) {
-      return this.formControlName.control.value
+      return this.formControlName.control.value;
     }
 
-    return this.element.value
+    return this.element.value;
   }
 
   format() {
