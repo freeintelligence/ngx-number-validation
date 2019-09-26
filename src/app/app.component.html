@@ -20,8 +20,8 @@
   <div class="form">
     <form [formGroup]="form" autocomplete="off">
       <label>Con FormControlName</label>
-      <input type="text" formControlName="number" name="number" [numberDisableValidations]="true" numberMin="5000" numberMax="76000" numberDecimals="2">
-      <p *ngIf="form?.controls?.number?.errors?.numberMin">El mínimo es {{ 5000 | numberFormat }}</p>
+      <input type="text" formControlName="number" numberMin="0,1" numberMax="76000" numberDecimals="2">
+      <p *ngIf="form?.controls?.number?.errors?.numberMin">El mínimo es {{ 0 | numberFormat }}</p>
 
       <ul>
         <li>Valor sin cambios: {{ form.controls.number.value | numberFormat }}</li>

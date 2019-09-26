@@ -30,11 +30,11 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
     if (this.model) {
       this.model.valueChanges.subscribe(e => {
-        this.element.value = this.numberService.transform().format(this.element.value);
+        this.element.value = this.numberService.transform().format(e);
       });
     } else if (this.formControlName) {
       this.formControlName.valueChanges.subscribe(e => {
-        this.element.value = this.numberService.transform().format(this.element.value);
+        this.element.value = this.numberService.transform().format(e);
       });
     }
   }

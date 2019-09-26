@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
-import { NumberValidators } from 'ngx-number-validation';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,11 +11,13 @@ export class AppComponent {
   number = 20000;
 
   form: FormGroup = new FormGroup({
-    number: new FormControl(null, [ NumberValidators.min(5000, ',') ]),
+    number: new FormControl(null),
   });
 
   constructor() {
-    this.form.controls.number.setValue(10000);
+    setTimeout(() => {
+      this.form.controls.number.setValue(0.1);
+    }, 1000);
   }
 
   typeof(data: any) {
