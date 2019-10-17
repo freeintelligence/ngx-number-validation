@@ -1,6 +1,6 @@
 import { HostListener, ElementRef, Input, ContentChild, OnInit, AfterViewInit } from '@angular/core';
 import { NgModel, FormControlName, AbstractControl, Validator } from '@angular/forms';
-import { LEFT_ARROW, RIGHT_ARROW, END, HOME } from '@angular/cdk/keycodes';
+import { LEFT_ARROW, RIGHT_ARROW, END, HOME, SHIFT } from '@angular/cdk/keycodes';
 
 import { NumberService } from '../number.service';
 
@@ -33,8 +33,20 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
         this.element.value = this.numberService.transform().format(e);
       });
     } else if (this.formControlName) {
-      this.formControlName.valueChanges.subscribe(e => {
-        this.element.value = this.numberService.transform().format(e);
+      this.formControlName.valueChanges.subscribe((e: string) => {
+        if (typeof e !== 'string' || !e.length) {
+          return;
+        }
+
+        const decimalIndex = e.indexOf(this.numberService.getConfig().decimalSeparator);
+        const valueLength = e.length;
+
+        console.log('e', e, decimalIndex, valueLength)
+
+        if (decimalIndex !== valueLength - 1) {
+          this.element.value = this.numberService.transform().format(e);
+          this.formControlName.control.setValue(this.numberService.transform().toInt(this.element.value), { emitEvent: false, emitModelToViewChange: false, emitViewToModelChange: true, onlySelf: true });
+        }
       });
     }
   }
@@ -53,7 +65,8 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
 
   @HostListener('keyup', ['$event'])
   onkeyup(event: KeyboardEvent) {
-    if (!this.isAuto() || event.keyCode === LEFT_ARROW || event.keyCode === RIGHT_ARROW || event.keyCode === END || event.keyCode === HOME) {
+    if (!this.isAuto() || event.keyCode === LEFT_ARROW || event.keyCode === RIGHT_ARROW || event.keyCode === END || event.keyCode === HOME || event.keyCode === SHIFT) {
+      event.preventDefault();
       return false;
     }
 
