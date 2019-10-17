@@ -29,11 +29,10 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
     this.setValue();
 
     if (this.model) {
-      this.model.valueChanges.subscribe(e => {
-        this.element.value = this.numberService.transform().format(e);
-      });
-    } else if (this.formControlName) {
-      this.formControlName.valueChanges.subscribe((e: string) => {
+      this.model.valueChanges.subscribe((e: string) => {
+        if (typeof e === 'number') {
+          e = this.numberService.transform().format(e);
+        }
         if (typeof e !== 'string' || !e.length) {
           return;
         }
@@ -41,7 +40,22 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
         const decimalIndex = e.indexOf(this.numberService.getConfig().decimalSeparator);
         const valueLength = e.length;
 
-        console.log('e', e, decimalIndex, valueLength)
+        if (decimalIndex !== valueLength - 1) {
+          this.element.value = this.numberService.transform().format(e);
+          this.model.update.emit(this.numberService.transform().toInt(this.element.value));
+        }
+      });
+    } else if (this.formControlName) {
+      this.formControlName.valueChanges.subscribe((e: string) => {
+        if (typeof e === 'number') {
+          e = this.numberService.transform().format(e);
+        }
+        if (typeof e !== 'string' || !e.length) {
+          return;
+        }
+
+        const decimalIndex = e.indexOf(this.numberService.getConfig().decimalSeparator);
+        const valueLength = e.length;
 
         if (decimalIndex !== valueLength - 1) {
           this.element.value = this.numberService.transform().format(e);
