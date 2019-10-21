@@ -87,7 +87,12 @@ export class BaseFormatDirective implements Validator, OnInit, AfterViewInit {
     const key = event.key;
 
     if (!(key === '-' || key === this.numberService.getConfig().decimalSeparator || key === this.numberService.getConfig().thousandSeparator )) {
-      this.setValue();
+      if (key === '0' && typeof this.element.value === 'string' && this.element.value.length && this.element.value.indexOf(',')) {
+        event.preventDefault();
+        return false;
+      } else {
+        this.setValue();
+      }
     }
   }
 
